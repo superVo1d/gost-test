@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+	<style>
+		#subtitle {
+			margin-top: 20vh;
+			font-family: 'Montserrat', sans-serif;
+			font-kerning: normal; 
+			font-weight: 700; 
+			font-size: 2.2rem; 
+			line-height: 1;
+			color: white;
+		}
+
+		#title {
+			margin-top: 20px;
+			font-family: 'Montserrat', sans-serif; 
+			font-kerning: normal; 
+			font-weight: 700; 
+			font-size: 3.3rem; 
+			line-height: 1;
+			color: white;
+		}
+		.btn {
+			border-radius: 100px;
+			font-size: 21px;
+			padding: 10px 30px;
+		}
+		.btn-main {
+			background-color: #f3852f;
+			color: white;
+		}
+		.btn-main:hover {
+			background-color: #d36e2b;
+		}
+
+		input {
+			padding: 10px 30px;
+			line-height: 33px;
+			max-width: 320px;
+			border: none;
+			color: white;
+			border-radius: 5px;
+			background-color: rgba(255, 255, 255, 0.1);
+			outline: none;
+		}
+
+		input:focus {
+			background-color: rgba(255, 255, 255, 0.2);
+		}
+
+		.jumb {
+			max-width: 450px;
+			float: left;
+		}
+
+		.showcase {
+			margin-top: 96px;
+			display: flex;
+		}
+
+		.slide {
+			margin: 0 12px;
+			flex-grow: 1;
+			color: white;
+		}
+
+		.slide h3 {
+			text-align: right;
+			cursor: pointer;
+		}
+
+		.image {
+			background-color: white;
+			opacity: .1;
+			height: 55vh;
+			margin-bottom: 1.5rem;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.image:hover {
+			opacity: .3;
+		}
+
+		.show-more-btn {
+			display: none;
+			background-color: rgba(255, 255, 255, 1);
+			text-decoration: none !important;
+			color: black !important;
+			font-size: 14px;
+			padding: 4px 10px 4px 8px;
+			line-height: 14px;
+			border-radius: 11px;
+			height: 22px;
+			letter-spacing: -.032em; 
+			font-weight: bold;
+			transition: all 0.3s ease;
+		}
+
+		.show-more-btn:hover {
+			background-color: rgba(255, 255, 255, .6);
+		}
+
+		.upper-line {
+			display: none;
+			position: absolute;
+			right: 0;
+			top: -10px;
+			height: 5px;
+			width: 85px;
+			background-color: white;
+		}
+
+		.slide-info>p {
+			display: none;
+		}
+
+		@media (max-width: 1254px) {
+			.slide:nth-child(4) {
+		    	display: none;
+		    }
+		}
+
+		@media (max-width: 1086px) {
+		    .slide:nth-child(3) {
+		    	display: none;
+		    }
+		}
+
+		@media (max-width: 946px) {
+		    .slide:nth-child(2) {
+		    	display: none;
+		    }
+		}
+
+        @media (max-width: 756px) {
+		    .slide:nth-child(1) {
+		    	display: none;
+		    }
+
+		    .arrow-wrapper {
+				top: 30px !important;
+			}
+		}
+
+		@media (max-width: 542px) {
+        	.jumb-wrapper {
+		    	padding: .5rem !important;
+		    }
+        	.jumb {
+        		margin-right: 0 !important;
+        	}		    
+		}
+
+        @media (max-width: 440px) {
+
+        	#subtitle {
+				font-size: 1.5rem;
+			}
+
+			#title {
+				font-size: 2.5rem;
+			}
+
+        	.jumb input {
+        		text-align: center;
+        		width: 100%;
+        		max-width: 100%;
+        		margin-right: 0 !important;
+        	}
+		    .btn-main {
+		    	width: 100%;
+		    }
+
+		}
+
+		.wrapper {
+		    margin: 0 auto;
+			max-width: 1500px;
+		}
+
+		.active>.slide-info>.upper-line {
+			display: block;
+			animation: .8s ease 0s normal upper-line-animation;
+		}
+
+		@keyframes upper-line-animation {
+		  0% {
+		    width: 0px;
+		  }
+
+		  40% {
+		    width: 0px;
+		  }		  
+
+		  100% {
+		    width: 85px;
+		  }
+		}
+
+		.active>.image {
+			height: 45vh;
+			cursor: default;
+			animation: .5 image-animation;
+			opacity: 1;
+			margin-bottom: 3rem;
+		}	
+
+		@keyframes image-animation {
+		  0% {
+		  	margin-bottom: 1.5rem;
+		    height: 55vh;
+		    opacity: .3;
+		  }
+
+		  100% {
+		  	margin-bottom: 3rem;
+		    height: 45vh;
+		    opacity: 1;
+		  }
+		}
+
+		.slide-info>.desc {
+			display: none;
+			//opacity: 0;
+		}
+
+		.active>.slide-info>.desc {
+			display: block;
+		}
+
+		.active p {
+			animation: 1s ease 0s normal p-animation;
+		}
+
+		@keyframes p-animation {
+		  0% {
+		  	opacity: 0;
+		  }
+
+		  40% {
+		  	opacity: 0;
+		  	transform: translateX(-30px);
+		  }
+
+		  100% {
+		  	opacity: 1;
+		    transform: translateX(0);
+		  }
+		}
+
+		.active p {
+			display: block;
+		}
+
+		.active .show-more-btn {
+			display: inline-block;
+			animation: 1s show-more-btn-animation;
+		}
+
+		@keyframes show-more-btn-animation {
+			0% {
+				opacity: 0;
+			}
+
+			40% {
+				opacity: 0;
+			}
+
+			100% {
+				opacity: 1;
+			}			
+		}
+
+		.active>.slide-info>h3 {
+			cursor: default;
+		}		
+
+		.slide.active {
+			animation: .5s slide-animation;
+		}
+
+		@keyframes slide-animation {
+		  from {
+		  	flex-grow: 1;
+		  }
+
+		  to {
+		  	flex-grow: 2;
+		  }
+		}		
+
+		.arrow {
+			position: absolute;
+			top: 40px;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
+		
+		.arrow span{
+			display: block;
+			width: 30px;
+			height: 30px;
+			border-bottom: 5px solid white;
+			border-right: 5px solid white;
+			transform: rotate(45deg);
+			animation: animate 2s infinite;
+		}
+
+		.arrow-wrapper {
+			position: relative;
+			height: 100px;
+			top: 0;
+		}
+
+		.arrow-wrapper:hover {
+			cursor: pointer;
+		}
+
+		@keyframes animate {
+			0%{
+				opacity: 0;
+				transform: rotate(45deg) translate(-10px,-10px);
+			}
+			80%{
+				opacity: 1;
+			}
+			100%{
+				opacity: 0;
+				transform: rotate(45deg) translate(10px,10px);
+			}
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container-fluid" style="background-color: black; min-height: 100vh">
+		<div class="row wrapper">
+			<div class="jumb-wrapper col-12 px-5">
+				<div class="jumb mr-4">
+					<h2 id="subtitle" class="display-4">Наружная реклама<br>для вашего бизнеса</h2>
+					<h1 id="title" class="display-1">Рассчитаем, соберем, поставим!</h1>
+					<p class="lead mt-4 text-white">Закажите звонок сейчас и&nbsp;узнайте всё о&nbsp;ценах и&nbsp;сроках изготовления</p>
+					<div class="d-flex flex-wrap">
+						<input type="text" name="telephone-number" class="mr-3 mt-3" placeholder="Введите ваш номер">
+						<div class="btn btn-main mt-3" onclick="openmodal()">Заказать</div>
+					</div>
+				</div>
+				<div class="showcase">
+					<div class="slide active">
+						<div class="image"></div>
+						<div class="position-relative slide-info">
+							<div class="upper-line"></div>
+							<h3>Вывески</h3>
+							<div class="desc">
+								<p class="pt-2 text-left">Изготовим и&nbsp;повесим куда вам нужно</p>
+								<a href="#" class="show-more-btn mt-2">+ Узнать больше</a>
+							</div>
+						</div>
+					</div>
+					<div class="slide">
+						<div class="image"></div>
+						<div class="position-relative slide-info">
+							<div class="upper-line"></div>
+							<h3>Объёмные буквы</h3>
+							<div class="desc">
+								<p class="pt-2 text-left">Объёмные буквы с&nbsp;подствекой и&nbsp;без</p>
+								<a href="#" class="show-more-btn mt-2">+ Узнать больше</a>
+							</div>
+						</div>						
+					</div>
+					<div class="slide">
+						<div class="image"></div>
+						<div class="position-relative slide-info">
+							<div class="upper-line"></div>
+							<h3>Световые короба</h3>
+							<div class="desc">
+								<p class="pt-2 text-left">Хорошо заметны днем и&nbsp;ночью</p>
+								<a href="#" class="show-more-btn mt-2">+ Узнать больше</a>
+							</div>
+						</div>
+					</div>
+					<div class="slide">
+						<div class="image"></div>
+						<div class="position-relative slide-info">
+							<div class="upper-line"></div>
+							<h3>Таблички и указатели</h3>
+							<div class="desc">
+								<p class="pt-2 text-left">Указатели любой формы и&nbsp;размера</p>
+								<a href="#" class="show-more-btn mt-2">+ Узнать больше</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="arrow-wrapper w-100">
+			<div class="arrow">
+				<span></span>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(".slide").click(function() {
+			$(".showcase").children().each(function() {
+				$(this).removeClass('active');
+			})
+			$(this).addClass('active');
+		})
+	</script>
+</body>
+</html>
